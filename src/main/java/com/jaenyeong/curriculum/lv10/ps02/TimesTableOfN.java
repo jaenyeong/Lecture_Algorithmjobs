@@ -82,14 +82,12 @@ public class TimesTableOfN {
                 continue;
             }
 
-            // key가 해당 행으로 나눠 떨어지면 1 빼기
-            if ((key % i) == 0) {
-                orderCount += ((key / i) - 1);
-                continue;
-            }
-
-            // 그 외
             orderCount += (key / i);
+
+            // key가 해당 행으로 나눠 떨어지면 1 빼기
+            if (key % i == 0) {
+                orderCount--;
+            }
         }
 
         // 이 때 orderCount는 key보다 작은 숫자의 개수이기 때문에 1을 더하여 반환
