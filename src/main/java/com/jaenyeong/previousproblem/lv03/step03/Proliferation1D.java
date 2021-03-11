@@ -10,7 +10,7 @@ public class Proliferation1D {
     [문제]
     0 과 1 로 이루어진 길이가 N 인 수열이 주어진다.
     이 수열에서 1 과 인접한 0 을 모두 1 로 바꾼 수열을 출력하여라.
-    [1차원_확산.png]
+    [proliferation_1d.png]
 
     [입력]
     첫 줄에 N 이 주어진다.

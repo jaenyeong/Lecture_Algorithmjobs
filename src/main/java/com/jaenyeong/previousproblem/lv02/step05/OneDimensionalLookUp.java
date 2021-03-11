@@ -11,7 +11,7 @@ public class OneDimensionalLookUp {
     길이가 n인 수열이 있다.
     어떤 i번 인덱스와 j번 인덱스에 대해 i와 j의 차이가 1이면 "두 인덱스가 인접하다"고 표현한다.
     이 수열의 각 인덱스에 대해 인접한 인덱스에 자신과 같은 수가 있으면 1을, 없으면 0을 출력하여라.
-    [1차원_조회.png]
+    [one_dimensional_look_up.png]
 
     [입력]
     첫 줄에 수열의 길이 n이 주어진다.

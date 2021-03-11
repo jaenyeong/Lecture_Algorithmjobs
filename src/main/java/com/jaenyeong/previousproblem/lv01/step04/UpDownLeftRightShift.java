@@ -69,7 +69,7 @@ public class UpDownLeftRightShift {
     [설명]
     입력의 예 1 번의 경우 (2, 1) 위치에 있는 8 이 출발지점이다.
     d 가 0, r 이 2 이므로 오른쪽으로 2 칸 이동한 (2, 3) 위치로 이동하게 돼서 정답은 6 이다.
-    [상하좌우_SHIFT_알고리즘.png]
+    [up_down_left_right_shift.png]
 
      */
 

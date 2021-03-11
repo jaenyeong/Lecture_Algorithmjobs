@@ -64,7 +64,7 @@ public class NPeopleMove {
 
     [설명]
     아래는 예 1 번에 대한 그림이다.
-    [N명_이동.png]
+    [n_people_move.png]
 
      */
 

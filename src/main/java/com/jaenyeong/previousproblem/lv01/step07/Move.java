@@ -83,7 +83,7 @@ public class Move {
 
     [설명]
     입력의 예 1 번 상황의 그림이다.
-    [이동_알고리즘.png]
+    [move.png]
 
      */
 

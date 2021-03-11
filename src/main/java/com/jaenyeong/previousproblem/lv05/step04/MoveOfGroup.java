@@ -66,7 +66,7 @@ public class MoveOfGroup {
 
     [설명]
     아래는 입출력 예 1번의 상황이다.
-    [단체_이동.png]
+    [move_of_group.png]
 
      */
 

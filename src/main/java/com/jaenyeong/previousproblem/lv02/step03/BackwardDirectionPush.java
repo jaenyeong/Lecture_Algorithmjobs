@@ -12,7 +12,7 @@ public class BackwardDirectionPush {
     이 수열의 모든 수가 왼쪽으로 k 칸 씩 밀린 결과를 출력하여라.
     단, 이 수열의 모양은 다음 그림처럼 원형이라서 n-1번 인덱스의 다음 칸은 0번이다.
     즉, 0번이 있던 값은 n-1번으로 이동한다.
-    [역방향_밀기.png]
+    [backward_direction_push.png]
 
     [입력]
     첫 줄에 수열의 길이 n이 주어진다.

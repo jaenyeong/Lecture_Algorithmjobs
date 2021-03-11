@@ -11,7 +11,7 @@ public class TwoDimensionalLookUp {
     세로 길이 n, 가로 길이 m인 2차원 배열이 있다.
     두 점 A, B가 인접하다는 것은 두 점이 배열에서 상하좌우로 붙어있는 것을 의미한다.
     이 배열의 각 인덱스에 대해 인접한 인덱스에 자신과 같은 수가 있으면 1을, 없으면 0을 출력하여라.
-    [2차원_조회.png]
+    [two_dimensional_look_up.png]
 
     [입력]
     첫 줄에 n, m이 주어진다.

@@ -10,7 +10,7 @@ public class DuplicatedLookUp1 {
     2차원 평면에 n 명의 사람이 있다.
     i 번 사람의 좌표는 두 자연수 yi, xi 로 표현되고, 같은 위치에 여러 사람이 존재할 수 있다.
     혼자 있는 사람의 수를 출력하여라.
-    [중복_조회1.png]
+    [duplicated_look_up_1.png]
 
     [입력]
     첫 줄에 n 이 주어진다.

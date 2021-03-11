@@ -13,7 +13,7 @@ public class ProliferationNSpace {
     두 점 (x1, y1), (x2, y2)의 거리는 |x1 - x2| + |y1 - y2|로 구한다.
     t 초가 지난 후 배열의 상태를 출력하여라.
     중간 계산 과정과 최종 결과의 모든 수는 int 로 표현 가능함이 보장된다.
-    [N칸_확산.png]
+    [proliferation_n_space.png]
 
     [입력]
     첫 줄에 N, M, k 가 주어진다.

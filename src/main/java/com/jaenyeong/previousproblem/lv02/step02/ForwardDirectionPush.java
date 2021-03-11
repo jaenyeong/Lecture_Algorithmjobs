@@ -12,7 +12,7 @@ public class ForwardDirectionPush {
     이 수열의 모든 수가 오른쪽으로 한 칸 씩 밀린 결과를 출력하여라.
     단, 이 수열의 모양은 다음 그림처럼 원형이라서 n-1번 인덱스의 다음 칸은 0번이다.
     즉, n-1번 값은 0번으로 이동한다.
-    [정방향_밀기.png]
+    [forward_direction_push.png]
 
     [입력]
     첫 줄에 수열의 길이 n이 주어진다.

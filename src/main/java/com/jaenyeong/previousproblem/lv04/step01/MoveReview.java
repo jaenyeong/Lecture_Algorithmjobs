@@ -83,7 +83,7 @@ public class MoveReview {
 
     [설명]
     입력의 예 1 번 상황의 그림이다.
-    [이동_복습.png]
+    [move_review.png]
 
      */
 

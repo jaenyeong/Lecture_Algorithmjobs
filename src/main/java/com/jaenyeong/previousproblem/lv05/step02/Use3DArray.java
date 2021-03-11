@@ -102,7 +102,7 @@ public class Use3DArray {
 
     [설명]
     아래는 입출력 예 1 번에 대한 그림이다.
-    [3차원_배열_사용.png]
+    [use_3d_array.png]
 
      */
 
