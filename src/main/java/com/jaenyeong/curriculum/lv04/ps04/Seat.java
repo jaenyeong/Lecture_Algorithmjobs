@@ -46,99 +46,63 @@ public class Seat {
      */
 
     private static final Scanner SC = new Scanner(System.in);
-    private static final int TAKE_A_SEAT = 1;
 
     public static void main(String[] args) {
         final int colSize = SC.nextInt();
         final int rowSize = SC.nextInt();
-
-        final int[][] hall = new int[rowSize][colSize];
-
-        int waitNumber = SC.nextInt();
-
+        final int target = SC.nextInt();
         SC.close();
 
-        final SeatPosition resultTicketing = ticketing(hall, rowSize, colSize, waitNumber);
+        int ticketing = 0;
 
-        System.out.println(resultTicketing.isSeat() ? resultTicketing : 0);
-    }
+        int rowStart = 1;
+        int rowEnd = rowSize;
 
-    private static SeatPosition ticketing(final int[][] hall, final int rowSize, final int colSize, int waitNumber) {
-        int rowStart = 0;
-        int rowEnd = rowSize - 1;
+        int colStart = 1;
+        int colEnd = colSize;
 
-        int colStart = 0;
-        int colEnd = colSize - 1;
-
-        while ((rowStart <= rowEnd) && (colStart <= colEnd)) {
-            // 위쪽 방향
-            for (int row = rowStart; row <= rowEnd; row++) {
-                hall[row][colStart] = TAKE_A_SEAT;
-                waitNumber--;
-                if (waitNumber <= 0) {
-                    return new SeatPosition(true, row, colStart);
+        while (rowStart <= rowEnd && colStart <= colEnd) {
+            // top
+            for (int currentRow = rowStart; currentRow <= rowEnd; currentRow++) {
+                ticketing++;
+                if (ticketing == target) {
+                    System.out.println(colStart + " " + currentRow);
+                    return;
                 }
             }
             colStart++;
 
-            // 오른쪽 방향
-            if (rowStart <= rowEnd) {
-                for (int col = colStart; col <= colEnd; col++) {
-                    hall[rowEnd][col] = TAKE_A_SEAT;
-                    waitNumber--;
-                    if (waitNumber <= 0) {
-                        return new SeatPosition(true, rowEnd, col);
-                    }
+            // right
+            for (int currentCol = colStart; currentCol <= colEnd; currentCol++) {
+                ticketing++;
+                if (ticketing == target) {
+                    System.out.println(currentCol + " " + rowEnd);
+                    return;
                 }
             }
             rowEnd--;
 
-            // 아래쪽 방향
-            if (colStart <= colEnd) {
-                for (int row = rowEnd; row >= rowStart; row--) {
-                    hall[row][colEnd] = TAKE_A_SEAT;
-                    waitNumber--;
-                    if (waitNumber <= 0) {
-                        return new SeatPosition(true, row, colEnd);
-                    }
+            // bottom
+            for (int currentRow = rowEnd; currentRow >= rowStart; currentRow--) {
+                ticketing++;
+                if (ticketing == target) {
+                    System.out.println(colEnd + " " + currentRow);
+                    return;
                 }
             }
             colEnd--;
 
-            // 왼쪽 방향
-            if (rowStart <= rowEnd) {
-                for (int col = colEnd; col >= colStart; col--) {
-                    hall[rowStart][col] = TAKE_A_SEAT;
-                    waitNumber--;
-                    if (waitNumber <= 0) {
-                        return new SeatPosition(true, rowStart, col);
-                    }
+            // left
+            for (int currentCol = colEnd; currentCol >= colStart; currentCol--) {
+                ticketing++;
+                if (ticketing == target) {
+                    System.out.println(currentCol + " " + rowStart);
+                    return;
                 }
             }
             rowStart++;
         }
 
-        return new SeatPosition(false, -1, -1);
-    }
-}
-
-class SeatPosition {
-    private final boolean seat;
-    private final int row;
-    private final int col;
-
-    public SeatPosition(boolean seat, int row, int col) {
-        this.seat = seat;
-        this.row = row;
-        this.col = col;
-    }
-
-    public boolean isSeat() {
-        return seat;
-    }
-
-    @Override
-    public String toString() {
-        return (col + 1) + " " + (row + 1);
+        System.out.println(0);
     }
 }
