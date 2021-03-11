@@ -42,131 +42,117 @@ public class SubtractionOfLargeDigits {
 //        System.out.println(first.subtract(second));
 
         // 배열을 사용하여 직접 연산
-        final String s1 = SCAN.next();
-        final String s2 = SCAN.next();
+        final String s1 = SCAN.nextLine().trim();
+        final String s2 = SCAN.nextLine().trim();
         SCAN.close();
 
-        final CompareValue cv = new CompareValue(s1, s2);
-        cv.execute();
-    }
-}
-
-class CompareValue {
-    private static final int S1_IS_SMALL = -1;
-    private static final int EQUAL_SIZE = 0;
-    private static final int S2_IS_SMALL = 1;
-    private final String s1;
-    private final String s2;
-    private final int s1Size;
-    private final int s2Size;
-
-    public CompareValue(String s1, String s2) {
-        this.s1 = s1;
-        this.s2 = s2;
-        this.s1Size = s1.length();
-        this.s2Size = s2.length();
-    }
-
-    public void execute() {
-        // 대소 비교 (입력 받은 순서대로 넘김)
-        final int sizeResult = compareSize(s1, s2);
-
-        // 값이 같으면 0을 반환하고 종료
-        if (sizeResult == EQUAL_SIZE) {
+        if (s1.equals(s2)) {
             System.out.println(0);
             return;
         }
 
-        // 배열 마지막 자리부터 값 삽입
-        final int bigNumberSize = (sizeResult == S2_IS_SMALL) ? s1Size : s2Size;
-        final int[] bigArr = (sizeResult == S2_IS_SMALL)
-            ? initArr(bigNumberSize, s1, s1Size)
-            : initArr(bigNumberSize, s2, s2Size);
-        final int[] smallArr = (sizeResult == S2_IS_SMALL)
-            ? initArr(bigNumberSize, s2, s2Size)
-            : initArr(bigNumberSize, s1, s1Size);
-
-        // 뺄셈 연산 (각 자리에 따라 대소비교 하며 연산)
-        final int[] arrResult = subtract(bigNumberSize, bigArr, smallArr);
-
-        // 결과 출력
-        printResult(sizeResult, bigNumberSize, arrResult);
+        new CompareNumbers(s1, s2).compareNumbers();
     }
 
-    private int compareSize(final String firstStr, final String secondStr) {
-        // s1 작으면 -1, 같으면 0, s2 작으면 1 반환
+    static class CompareNumbers {
+        private final String s1;
+        private final String s2;
+        private final boolean isS1BiggerThanS2;
+        private final int maxSize;
 
-        // 길이가 다를 때
-        if (s1Size > s2Size) {
-            return S2_IS_SMALL;
+        CompareNumbers(final String s1, final String s2) {
+            this.s1 = s1;
+            this.s2 = s2;
+            this.isS1BiggerThanS2 = isS1BiggerThanS2();
+            this.maxSize = isS1BiggerThanS2 ? s1.length() : s2.length();
         }
 
-        if (s1Size < s2Size) {
-            return S1_IS_SMALL;
-        }
-
-        // 길이가 같을 때
-        for (int i = 0; i < s1Size; i++) {
-            final int i1 = Integer.parseInt(String.valueOf(firstStr.charAt(i)));
-            final int i2 = Integer.parseInt(String.valueOf(secondStr.charAt(i)));
-
-            if (i1 > i2) {
-                return S2_IS_SMALL;
+        private boolean isS1BiggerThanS2() {
+            if (s1.length() > s2.length()) {
+                return true;
             }
 
-            if (i1 < i2) {
-                return S1_IS_SMALL;
-            }
-        }
-
-        // 값이 같을 때
-        return EQUAL_SIZE;
-    }
-
-    private int[] initArr(final int bigNumberSize, final String str, final int strSize) {
-        final int[] arr = new int[bigNumberSize];
-
-        for (int i = 0; i < strSize; i++) {
-            arr[bigNumberSize - i - 1] = (str.charAt(strSize - i - 1) - '0');
-        }
-
-        return arr;
-    }
-
-    private int[] subtract(final int bigNumberSize, final int[] bigArr, final int[] smallArr) {
-        final int[] arrResult = new int[bigNumberSize];
-        for (int i = (bigNumberSize - 1); i >= 0; i--) {
-            int bigDigit = bigArr[i];
-            int smallDigit = smallArr[i];
-
-            if (bigDigit < smallDigit) {
-                bigArr[i - 1]--;
-                bigDigit += 10;
+            if (s2.length() > s1.length()) {
+                return false;
             }
 
-            arrResult[i] = (bigDigit - smallDigit);
-        }
-        return arrResult;
-    }
+            for (int i = 0; i < s1.length(); i++) {
+                final int s1Number = s1.charAt(i) - '0';
+                final int s2Number = s2.charAt(i) - '0';
 
-    private void printResult(final int sizeResult, final int bigNumberSize, final int[] arrResult) {
-        final StringBuilder sb = new StringBuilder();
-        if (sizeResult == S1_IS_SMALL) {
-            sb.append("-");
-        }
+                if (s1Number > s2Number) {
+                    return true;
+                }
 
-        int idx = 0;
-        while (idx < bigNumberSize) {
-            if (arrResult[idx] == 0) {
-                idx++;
-                continue;
+                if (s2Number > s1Number) {
+                    return false;
+                }
             }
 
-            for (; idx < bigNumberSize; idx++) {
-                sb.append(arrResult[idx]);
+            throw new IllegalArgumentException("Why?");
+        }
+
+        public void compareNumbers() {
+            final int[] bigNumber = new int[maxSize];
+            final int[] smallNumber = new int[maxSize];
+
+            if (isS1BiggerThanS2) {
+                initNumber(bigNumber, s1);
+                initNumber(smallNumber, s2);
+            } else {
+                initNumber(smallNumber, s1);
+                initNumber(bigNumber, s2);
+            }
+
+            print(calculate(bigNumber, smallNumber));
+        }
+
+        private void initNumber(final int[] numbers, final String givenString) {
+            final int numbersLastIdx = numbers.length - 1;
+            final int givenStringLastIdx = givenString.length() - 1;
+
+            for (int i = 0; i <= givenStringLastIdx; i++) {
+                numbers[numbersLastIdx - i] = givenString.charAt(givenStringLastIdx - i) - '0';
             }
         }
 
-        System.out.println(sb.toString());
+        private int[] calculate(final int[] bigNumber, final int[] smallNumber) {
+            final int[] result = new int[maxSize];
+
+            for (int i = maxSize - 1; i >= 0; i--) {
+                int bigOnes = bigNumber[i];
+                int smallOnes = smallNumber[i];
+
+                if (bigOnes < smallOnes) {
+                    bigNumber[i - 1]--;
+                    bigOnes += 10;
+                }
+
+                result[i] = bigOnes - smallOnes;
+            }
+
+            return result;
+        }
+
+        private void print(final int[] resultNumber) {
+            final StringBuilder result = new StringBuilder();
+            if (!isS1BiggerThanS2) {
+                result.append("-");
+            }
+
+            int idx = 0;
+            while (idx < maxSize) {
+                if (resultNumber[idx] == 0) {
+                    idx++;
+                    continue;
+                }
+
+                while (idx < maxSize) {
+                    result.append(resultNumber[idx++]);
+                }
+            }
+
+            System.out.println(result.toString());
+        }
     }
 }
