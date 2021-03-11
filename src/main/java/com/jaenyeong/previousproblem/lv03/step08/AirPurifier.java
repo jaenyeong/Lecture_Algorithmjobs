@@ -2,7 +2,7 @@ package com.jaenyeong.previousproblem.lv03.step08;
 
 import java.util.Scanner;
 
-public class PS08AirPurifier {
+public class AirPurifier {
     /*
     공기 청정기 (시간 제한 3초)
 
