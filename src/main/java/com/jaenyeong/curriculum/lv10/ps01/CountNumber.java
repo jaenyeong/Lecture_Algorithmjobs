@@ -125,7 +125,7 @@ public class CountNumber {
         if (numbers[begin] > target) return NOT_FOUND;
         if (numbers[last] < target) return NOT_FOUND;
 
-        // 맨 처음 값이 타겟가 동일한 경우
+        // 맨 처음 값이 타겟과 동일한 경우
         if (numbers[begin] == target) return begin;
 
         // start, end 정의
@@ -159,7 +159,7 @@ public class CountNumber {
         if (numbers[begin] > target) return NOT_FOUND;
         if (numbers[last] < target) return NOT_FOUND;
 
-        // 맨 마지막 값이 타겟가 동일한 경우
+        // 맨 마지막 값이 타겟과 동일한 경우
         if (numbers[last] == target) return last;
 
         // start, end 정의
