@@ -1,5 +1,6 @@
 package com.jaenyeong.curriculum.lv10.ps04;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CutTrees {
@@ -39,69 +40,43 @@ public class CutTrees {
     private static final Scanner SC = new Scanner(System.in);
 
     public static void main(String[] args) {
-        final int n = SC.nextInt();
-        final int m = SC.nextInt();
+        final int numberOfTree = SC.nextInt();
+        final int needHeight = SC.nextInt();
 
-        final long[] trees = new long[n];
-        long maxTreeSize = 0;
-        for (int i = 0; i < n; i++) {
-            final long treeSize = SC.nextLong();
-            trees[i] = treeSize;
-            maxTreeSize = Math.max(maxTreeSize, treeSize);
+        final long[] trees = new long[numberOfTree];
+        for (int i = 0; i < numberOfTree; i++) {
+            trees[i] = SC.nextInt();
         }
 
         SC.close();
 
-        final TreeCutting tc = new TreeCutting(trees, m, maxTreeSize);
-        tc.getTree();
-    }
-}
+        Arrays.sort(trees);
 
-class TreeCutting {
-    private final long[] trees;
-    private final long wishSize;
-    private final long maxTreeSize;
+        long shortestHeight = 0;
+        long longestHeight = trees[numberOfTree - 1];
 
-    public TreeCutting(long[] trees, long wishSize, long maxTreeSize) {
-        this.trees = trees;
-        this.wishSize = wishSize;
-        this.maxTreeSize = maxTreeSize;
-    }
+        while (shortestHeight + 1 < longestHeight) {
+            final long midHeight = (shortestHeight + longestHeight) / 2;
 
-    public void getTree() {
-        long start = 1;
-        long end = maxTreeSize - 1;
+            final long heightSum = cuttingBy(midHeight, trees);
 
-        // 나무 높이의 합은 항상 wishSize(m)보다 큼
-        final long endSize = getCutTreesBy(end);
-        if (endSize >= wishSize) {
-            System.out.println(endSize);
-            return;
-        }
-
-        while ((start + 1) < end) {
-            final long mid = ((start + end) / 2);
-
-            final long treeSize = getCutTreesBy(mid);
-
-            if (treeSize >= wishSize) {
-                start = mid;
+            if (heightSum >= needHeight) {
+                shortestHeight = midHeight;
                 continue;
             }
 
-            end = mid;
+            longestHeight = midHeight;
         }
 
-        System.out.println(start);
+        System.out.println(shortestHeight);
     }
 
-    private long getCutTreesBy(final long k) {
-        long cutTreeSize = 0;
-        for (long t : trees) {
-            final long cutTree = (t - k);
-            cutTreeSize += Math.max(cutTree, 0);
+    private static long cuttingBy(final long midHeight, final long[] trees) {
+        long heightSum = 0;
+        for (long treeHeight : trees) {
+            heightSum += Math.max(treeHeight - midHeight, 0);
         }
-
-        return cutTreeSize;
+        return heightSum;
     }
 }
+
